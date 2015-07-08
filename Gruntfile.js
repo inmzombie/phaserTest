@@ -3,6 +3,16 @@ module.exports = function (grunt) {
 
     var loadConfig = require('load-grunt-config');
 
+    grunt.initConfig({
+        connect: {
+            server: {
+                options: {
+                    port: 1234,
+                    base: '.'
+                }
+            }
+        }
+    });
     loadConfig(grunt, {
         configPath: __dirname + '/tasks/options',
         config: {
@@ -194,7 +204,7 @@ module.exports = function (grunt) {
         }
 
     });
-
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.registerTask('dist', 'Compile all Phaser versions and copy to the build folder', function() {
 
         grunt.task.run('clean:release');
@@ -250,7 +260,6 @@ module.exports = function (grunt) {
         grunt.task.run('custom');
 
     });
-
     grunt.registerTask('minimum', 'Phaser without any optional modules except Pixi', function() {
 
         grunt.option('exclude', 'gamepad,keyboard,bitmapdata,graphics,rendertexture,text,bitmaptext,retrofont,net,tweens,sound,debug,arcade,ninja,p2,tilemaps,particles');
